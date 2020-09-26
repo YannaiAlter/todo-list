@@ -1,17 +1,24 @@
 import express = require('express')
-import { todos } from './src/routes/todos'
 import bodyParser from 'body-parser'
+import 'reflect-metadata'
+import { createConnection } from 'typeorm'
+import { TodoEntity } from './src/typeorm/Todo/TodoEntity'
 
-// Create a new express app instance
-const app: express.Application = express()
-app.use(bodyParser.json())
+createConnection()
+    .then((connection) => {
+        const app: express.Application = express()
+        const { todos } = require('./src/routes/todos')
+        app.use(bodyParser.json())
 
-//  Connect all our routes to our application
-app.use('/api', todos)
+        //api/todos
+        app.use('/api', todos)
 
-app.get('/', function (req, res) {
-    res.send('Hello World!')
-})
-app.listen(3000, function () {
-    console.log('App is listening on port 3000!')
-})
+        //api
+        app.get('/api', function (req, res) {
+            res.send('Hello World!')
+        })
+        app.listen(3000, function () {
+            console.log('App is listening on port 3000!')
+        })
+    })
+    .catch((error) => console.log(error))

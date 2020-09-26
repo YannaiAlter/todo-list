@@ -1,0 +1,13 @@
+[
+    {
+        "type": "postgres",
+        "host": "localhost",
+        "port": 5432,
+        "username": "postgres",
+        "password": "password1",
+        "database": "postgres",
+        "entities": ["build/src/typeorm/Todo/TodoEntity.js"],
+        "synchronize": true,
+        "logging": false
+    }
+]

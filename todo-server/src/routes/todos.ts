@@ -1,25 +1,24 @@
 // /api/todos
 import { Router } from 'express'
-import { TodoManager } from '../models/TodoManager'
-import { Todo } from '../models/Todo'
+import { TodoManager } from '../typeorm/Todo/TodoManager'
 
 export const todos = Router()
 const manager = new TodoManager()
 
-todos.get('/todos', (req, res) => {
-    res.send(manager.todos)
+todos.get('/todos', async (req, res) => {
+    res.send(await manager.all())
 })
 
-todos.post('/todos', (req, res) => {
+todos.post('/todos', async (req, res) => {
     if (req.body.content === undefined) {
         res.sendStatus(400)
         return
     }
 
-    res.send(manager.add(req.body.content))
+    res.send(await manager.add(req.body.content))
 })
 
-todos.post('/todos/remove', (req, res) => {
-    manager.removeAll()
+todos.post('/todos/remove', async (req, res) => {
+    await manager.removeAll()
     res.sendStatus(200)
 })
