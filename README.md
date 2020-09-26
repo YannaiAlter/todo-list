@@ -16,3 +16,9 @@ Set environment variables
  npm i
  npm start
 ```
+
+### Running with default postgresql config
+
+```sh
+DATABASE_URL='postgresql://postgres:password1@localhost/postgres' npm start
+```
