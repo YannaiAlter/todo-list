@@ -10,11 +10,12 @@ const typeorm_1 = require("typeorm");
 typeorm_1.createConnection()
     .then((connection) => {
     const app = express();
-    app.use(body_parser_1.default.json());
     const { todos } = require('./src/routes/todos');
-    //  Connect all our routes to our application
+    app.use(body_parser_1.default.json());
+    //api/todos
     app.use('/api', todos);
-    app.get('/', function (req, res) {
+    //api
+    app.get('/api', function (req, res) {
         res.send('Hello World!');
     });
     app.listen(3000, function () {
