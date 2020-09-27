@@ -2,6 +2,7 @@ import express = require("express");
 import bodyParser from "body-parser";
 import "reflect-metadata";
 import { createDBConnection } from "./connectionConfig";
+import cors from "cors";
 
 createDBConnection()
   .then((connection) => {
@@ -10,12 +11,16 @@ createDBConnection()
     app.use(bodyParser.json());
 
     //api/todos
-    app.use("/api", todos);
+    app.use("/api", todos, cors());
 
     //api
-    app.get("/api", function (req, res) {
-      res.send("Hello World!");
-    });
+    app.get(
+      "/api",
+      function (req, res) {
+        res.send("Hello World!");
+      },
+      cors()
+    );
     app.listen(process.env.PORT || 3000, function () {
       console.log("App is listening on port 3000!");
     });
