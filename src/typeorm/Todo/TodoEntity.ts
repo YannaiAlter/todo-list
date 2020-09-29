@@ -1,10 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class TodoEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    content: string
+  @Column()
+  content: string;
+
+  @Column({ default: false })
+  isDone: boolean;
 }
