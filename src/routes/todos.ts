@@ -1,6 +1,5 @@
 // /api/todos
 import { Router } from "express";
-import { TodoEntity } from "../typeorm/Todo/TodoEntity";
 import { TodoManager } from "../typeorm/Todo/TodoManager";
 
 export const todos = Router();
